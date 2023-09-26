@@ -1,2 +1,2 @@
-export * from './ThemeRegistry';
+export * from './theme-registry';
 export * from './ui';
