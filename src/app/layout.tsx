@@ -1,29 +1,36 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import { Roboto } from 'next/font/google';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline} from '@mui/material';
 
-import { ThemeRegistry } from '@/components';
+import { ThemeRegistry, Navbar } from '@/components';
 
 const roboto = Roboto({ 
   subsets: ['latin'], 
   weight:[ '300', '400', '500', '700' ] 
-})
+});
 
 export const metadata: Metadata = {
   title: 'Access-control-app',
   description: 'Access-control app for safety places',
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
 }) {
+  const cookieStore = cookies();
+  let prefersDarkMode = cookieStore.get('prefersDarkMode');
+  
   return (
-    <ThemeRegistry>
+    <ThemeRegistry isDarkMode={ prefersDarkMode?.value.toLowerCase() === 'true' }>
       <CssBaseline />
       <html lang="es">
-        <body className={roboto.className}>{children}</body>
+        <body className={roboto.className}>
+          <Navbar />
+          {children}
+        </body>
       </html>
     </ThemeRegistry>
   )
