@@ -1,4 +1,3 @@
-'use client'
 import { Roboto } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
 
@@ -8,7 +7,7 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-export const darkTheme = createTheme({
+const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
@@ -27,3 +26,5 @@ export const darkTheme = createTheme({
     },
   },
 });
+
+export default darkTheme;

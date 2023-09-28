@@ -1,3 +1,1 @@
-export * from './EmotionCache';
-export * from './ThemeRegistry';
-export * from '../../themes/light-theme';
+export { default as ThemeRegistry } from './ThemeRegistry';

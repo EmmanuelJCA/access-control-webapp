@@ -1,14 +1,9 @@
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import { Roboto } from 'next/font/google';
 import { CssBaseline} from '@mui/material';
 
-import { ThemeRegistry, Navbar } from '@/components';
-
-const roboto = Roboto({ 
-  subsets: ['latin'], 
-  weight:[ '300', '400', '500', '700' ] 
-});
+import { Providers } from '@/store/Providers';
+import { Navbar, ThemeRegistry } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Access-control-app',
@@ -24,14 +19,16 @@ export default function RootLayout({
   let prefersDarkMode = cookieStore.get('prefersDarkMode');
   
   return (
-    <ThemeRegistry isDarkMode={ prefersDarkMode?.value.toLowerCase() === 'true' }>
-      <CssBaseline />
-      <html lang="es">
-        <body className={roboto.className}>
-          <Navbar />
-          {children}
-        </body>
-      </html>
-    </ThemeRegistry>
+    <html lang="es">
+      <body>
+        <Providers>
+          <ThemeRegistry isDarkMode={prefersDarkMode?.value.toLowerCase() === 'true'}>
+            <CssBaseline />
+            <Navbar />
+            { children }
+          </ThemeRegistry>
+        </Providers>
+      </body>
+    </html>
   )
 }
