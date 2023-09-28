@@ -2,7 +2,7 @@ import NextLink from 'next/link';
 import { Container, Box, Avatar, Typography, Grid, TextField, Button, Link } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-export const SignInPage = () => {
+const SignInPage = () => {
 
   return (
     <Container component="main" maxWidth="xs">
