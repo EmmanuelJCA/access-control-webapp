@@ -12,7 +12,7 @@ export default function HomePage() {
         }}
       >
         <Typography component="h1" variant="h1">
-          Access control app
+          Access control
         </Typography>
       </Box>
     </Container>
