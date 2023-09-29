@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import { Provider } from 'react-redux';
 
-import { store } from './';
+import { store } from './store';
 
 interface Props {
   children: React.ReactNode

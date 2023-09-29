@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { CssBaseline} from '@mui/material';
 
-import { Providers } from '@/store/Providers';
+import { Providers } from '@/redux/Providers';
 import { Navbar, ThemeRegistry } from '@/components';
 
 export const metadata: Metadata = {
