@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { toggleIsDarkMode } from "@/redux/features/uiSlice";
+import { toggleIsDarkMode } from "@/redux/features/ui/uiSlice";
 import { setCookieItem } from "@/utils/cookies";
 
 export const useColorScheme = () => {

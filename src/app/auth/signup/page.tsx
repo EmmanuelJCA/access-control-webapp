@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 import { Container, Box, Avatar, Typography, Grid, TextField, Button, Link } from "@mui/material";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { LockOutlined } from '@mui/icons-material';
 
 const SignUpPage = () => {
 
@@ -15,7 +15,7 @@ const SignUpPage = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <LockOutlined />
           </Avatar>
           <Typography component="h1" variant="h5">
             Registro
