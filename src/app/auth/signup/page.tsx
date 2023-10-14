@@ -1,11 +1,27 @@
+"use client"
 import NextLink from 'next/link';
-import { Container, Box, Avatar, Typography, Grid, TextField, Button, Link } from "@mui/material";
+import { Container, Box, Avatar, Typography, Grid, TextField, Button, Link, MenuItem } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { IMaskInput } from 'react-imask';
+import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import { useForm } from 'react-hook-form';
+import { ISignUp } from '@/interfaces';
 
 const SignUpPage = () => {
 
+  const { register, handleSubmit, formState: { errors } } = useForm<ISignUp>();
+
+  const onSubmit = (data: ISignUp) => {
+    console.log(data);
+    console.log(errors);
+    
+  };
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
         <Box
           sx={{
             marginTop: 8,
@@ -20,48 +36,111 @@ const SignUpPage = () => {
           <Typography component="h1" variant="h5">
             Registro
           </Typography>
-          <Box component="form" sx={{ mt: 3 }}>
+          <Box component="form" sx={{ mt: 3 }} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
                   fullWidth
-                  id="firstName"
                   label="Nombre"
                   autoFocus
+                  { ...register('firstName', {
+                    required: 'Este campo es requerido',
+                    minLength: { value: 2, message: 'Mínimo 2 caracteres' }
+                  })}
+                error={ !!errors.firstName }
+                helperText={ errors.firstName?.message }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
-                  id="lastName"
                   label="Apellido"
-                  name="lastName"
-                  autoComplete="family-name"
+                  { ...register('lastName', {
+                    required: 'Este campo es requerido',
+                    minLength: { value: 2, message: 'Mínimo 2 caracteres' }
+                  })}
+                  error={ !!errors.lastName }
+                  helperText={ errors.lastName?.message }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <LocalizationProvider dateAdapter={AdapterLuxon}>
+                  <DatePicker
+                    label="Fecha de nacimiento"
+                    value={null}                    
+                    onChange={() => {}}
+                    slotProps={{ 
+                      textField: { 
+                        fullWidth: true,
+                        ...register('birthdate', {
+                          required: 'Este campo es requerido',
+                          valueAsDate: true,
+                        }),
+                        error: !!errors.lastName,
+                        helperText: errors.lastName?.message,
+                      }
+                    }}
+                  />
+                </LocalizationProvider>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <TextField
+                select
+                fullWidth
+                label="Género"
+                { ...register('gender', {
+                  required: 'Este campo es requerido',
+                })}
+                error={ !!errors.gender }
+                helperText={ errors.gender?.message }
+              >
+                <MenuItem value="Male">Masculino</MenuItem>
+                <MenuItem value="Female">Femenino</MenuItem>
+              </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Identificación"
+                  { ...register('identification', {
+                    required: 'Este campo es requerido',
+                  })}
+                  error={ !!errors.identification }
+                  helperText={ errors.identification?.message }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Teléfono"
+                  { ...register('phone', {
+                    required: 'Este campo es requerido',
+                  })}
+                  error={ !!errors.phone }
+                  helperText={ errors.phone?.message }
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
-                  id="email"
                   label="Email"
-                  name="email"
-                  autoComplete="email"
+                  { ...register('email', {
+                    required: 'Este campo es requerido',
+                  })}
+                  error={ !!errors.email }
+                  helperText={ errors.email?.message }
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
-                  name="password"
                   label="Contraseña"
                   type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  { ...register('password', {
+                    required: 'Este campo es requerido',
+                  })}
+                  error={ !!errors.password }
+                  helperText={ errors.password?.message }
                 />
               </Grid>
             </Grid>
