@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { toggleIsDarkMode } from "@/redux/features/ui/uiSlice";
-import { setCookieItem } from "@/utils/cookies";
+import { useAppDispatch, useAppSelector } from '@/redux/store';
+import { toggleIsDarkMode } from '@/redux/features/ui/uiSlice';
+import { setCookieItem } from '@/utils/browser-storage';
 
 export const useColorScheme = () => {
   const { isDarkMode } = useAppSelector(state => state.uiReducer);

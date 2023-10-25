@@ -3,9 +3,9 @@ import { ReactNode, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import NextAppDirEmotionCacheProvider from './EmotionCache';
+import NextAppDirEmotionCacheProvider from './emotion-cache';
 import { darkTheme, lightTheme } from '@/themes';
-import { getCookieItem } from '@/utils/cookies';
+import { getCookieItem } from '@/utils/browser-storage';
 import { useColorScheme } from '@/hooks';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
   isDarkMode: boolean | undefined;
 }
 
-export default function ThemeRegistry({ children, isDarkMode: darkMode }: Props) {
+export function ThemeRegistry({ children, isDarkMode: darkMode }: Props) {
 
   const { isDarkMode, setIsDarkMode } = useColorScheme();
   

@@ -2,12 +2,11 @@ import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { CssBaseline} from '@mui/material';
 
-import { Providers } from '@/redux/Providers';
-import { Navbar, ThemeRegistry } from '@/components';
+import { ReduxProvider, ThemeRegistry, Navbar } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Access-control-app',
-  description: 'Access-control app for safety places',
+  description: 'Access-control, una aplicación para el control de acceso a lugares seguros',
 };
 
 export default function RootLayout({
@@ -21,13 +20,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <Providers>
+        <ReduxProvider>
           <ThemeRegistry isDarkMode={prefersDarkMode?.value.toLowerCase() === 'true'}>
             <CssBaseline />
             <Navbar />
             { children }
           </ThemeRegistry>
-        </Providers>
+        </ReduxProvider>
       </body>
     </html>
   )

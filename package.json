@@ -11,16 +11,10 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.8",
-    "@mui/icons-material": "^5.14.9",
+    "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.10",
     "@mui/x-date-pickers": "^6.16.1",
     "@reduxjs/toolkit": "^1.9.6",
-    "@types/node": "20.6.3",
-    "@types/react": "18.2.22",
-    "@types/react-dom": "18.2.7",
-    "eslint": "8.50.0",
-    "eslint-config-next": "13.5.2",
     "js-cookie": "^3.0.5",
     "luxon": "^3.4.3",
     "next": "^13.5.3",
@@ -33,6 +27,12 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@types/js-cookie": "^3.0.4"
+    "@types/js-cookie": "^3.0.4",
+    "@types/node": "20.6.3",
+    "@types/react": "18.2.22",
+    "@types/react-dom": "18.2.7",
+    "eslint": "8.50.0",
+    "eslint-config-next": "13.5.2",
+    "typescript": "5.2.2"
   }
 }

@@ -1,6 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { getCookieItem } from "@/utils/cookies";
+import { getCookieItem } from '@/utils/browser-storage';
 
 interface UIState {
   isDarkMode: boolean | null;
