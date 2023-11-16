@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { enqueueSnackbar } from 'notistack';
 
 import { EGender, ISignUp } from '@/interfaces'
-import { useSignUpMutation } from '@/redux/features/auth/authApiSlice';
+import { useSignUpMutation } from '@/redux/features/auth';
 
 interface FormData {
   firstName: string;
@@ -30,8 +30,10 @@ export const SignUpForm = () => {
       profile
     };
     const user = await signUpApi(signUp).unwrap();
-    enqueueSnackbar(`Su cuenta se ha registrado exitosamente, bienvenido ${user.profile.firstName} ${user.profile.lastName}`, { variant: 'success' });
-    if(user) replace('/');
+    if(user){
+      enqueueSnackbar(`Su cuenta se ha registrado exitosamente, bienvenido ${user.profile.firstName} ${user.profile.lastName}`, { variant: 'success' });
+      replace('/');
+    } 
   };
 
   return (
