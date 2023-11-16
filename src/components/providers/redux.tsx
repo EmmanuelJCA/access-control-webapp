@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Provider } from 'react-redux';
 
 import { store } from '@/redux/store';
+import { SnackbarProvider } from 'notistack';
 
 interface Props {
   children: React.ReactNode;
@@ -11,7 +12,9 @@ interface Props {
 export const ReduxProvider:FC<Props> = ({ children }) => {
   return (
     <Provider store={ store }>
-      { children }
+      <SnackbarProvider>
+        { children }
+      </SnackbarProvider>
     </Provider>
   )
 }

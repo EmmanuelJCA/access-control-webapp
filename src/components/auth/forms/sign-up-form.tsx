@@ -1,8 +1,10 @@
 'use client';
 import NextLink from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Box, Avatar, Typography, Grid, TextField, MenuItem, Button, Link } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
+import { enqueueSnackbar } from 'notistack';
 
 import { EGender, ISignUp } from '@/interfaces'
 import { useSignUpMutation } from '@/redux/features/auth/authApiSlice';
@@ -17,6 +19,7 @@ interface FormData {
 }
 
 export const SignUpForm = () => {
+  const { replace } = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
   const [ signUpApi ] = useSignUpMutation();
 
@@ -26,9 +29,9 @@ export const SignUpForm = () => {
       password,
       profile
     };
-    const res = await signUpApi(signUp).unwrap();
-    console.log(res);
-    
+    const user = await signUpApi(signUp).unwrap();
+    enqueueSnackbar(`Su cuenta se ha registrado exitosamente, bienvenido ${user.profile.firstName} ${user.profile.lastName}`, { variant: 'success' });
+    if(user) replace('/');
   };
 
   return (
@@ -58,6 +61,7 @@ export const SignUpForm = () => {
                 minLength: { value: 2, message: 'Mínimo 2 caracteres' }
               })}
               error={!!errors.firstName}
+              helperText={errors.firstName?.message}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -69,6 +73,7 @@ export const SignUpForm = () => {
                 minLength: { value: 2, message: 'Mínimo 2 caracteres' }
               })}
               error={!!errors.lastName}
+              helperText={errors.lastName?.message}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -81,6 +86,7 @@ export const SignUpForm = () => {
                 required: 'Este campo es requerido',
               })}
               error={!!errors.gender}
+              helperText={errors.gender?.message}
             >
               <MenuItem value="M">Masculino</MenuItem>
               <MenuItem value="F">Femenino</MenuItem>
@@ -94,6 +100,7 @@ export const SignUpForm = () => {
                 required: 'Este campo es requerido',
               })}
               error={!!errors.identification}
+              helperText={errors.identification?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -104,6 +111,7 @@ export const SignUpForm = () => {
                 required: 'Este campo es requerido',
               })}
               error={!!errors.email}
+              helperText={errors.email?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -115,6 +123,7 @@ export const SignUpForm = () => {
                 required: 'Este campo es requerido',
               })}
               error={!!errors.password}
+              helperText={errors.password?.message}
             />
           </Grid>
         </Grid>

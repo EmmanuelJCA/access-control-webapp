@@ -3,7 +3,7 @@ export interface IUser {
   email:    string;
   isActive: boolean;
   profile:  IProfile;
-  token:    string;
+  roles:    string[];
 }
 
 export interface IProfile {
@@ -16,4 +16,8 @@ export interface IProfile {
 export enum EGender {
   Male = 'm',
   Female = 'f'
+}
+
+export interface IAuthenticatedUser extends Omit<IUser, 'roles'> {
+  token: string;
 }
