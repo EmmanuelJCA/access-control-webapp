@@ -1,9 +1,9 @@
-import { IAuthenticatedUser, ISignUp } from "@/interfaces";
+import { IAuthenticatedUser, ISignIn, ISignUp, IUser } from "@/interfaces";
 import { apiSlice } from "@/redux/services/apiSlice";
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    signUp: builder.mutation<IAuthenticatedUser, ISignUp>({
+    signUp: builder.mutation<IUser, ISignUp>({
       query: userData => ({
         url: '/api/auth/signup',
         method: 'POST',
@@ -12,7 +12,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         }
       }),
     }),
-    signIn: builder.mutation({
+    signIn: builder.mutation<IAuthenticatedUser, ISignIn>({
       query: userCredentials => ({
         url: '/api/auth/signin',
         method: 'POST',
