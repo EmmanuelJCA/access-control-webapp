@@ -2,17 +2,33 @@
 import NextLink from 'next/link';
 import { Box, Avatar, Typography, Grid, TextField, MenuItem, Button, Link } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { useForm } from 'react-hook-form';
 
-import { ISignUp } from '@/interfaces'
+import { EGender, ISignUp } from '@/interfaces'
+import { useSignUpMutation } from '@/redux/features/auth/authApiSlice';
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  gender: EGender;
+  identification: string;
+  email: string;
+  password: string;
+}
 
 export const SignUpForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ISignUp>();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const [ signUpApi ] = useSignUpMutation();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async({ email, password, ...profile }: FormData) => {
+    const signUp: ISignUp = {
+      email,
+      password,
+      profile
+    };
+    const res = await signUpApi(signUp).unwrap();
+    console.log(res);
+    
   };
 
   return (
@@ -56,27 +72,9 @@ export const SignUpForm = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <LocalizationProvider dateAdapter={AdapterLuxon}>
-              <DatePicker
-                label="Fecha de nacimiento"
-                onChange={() => { }}
-                slotProps={{
-                  textField: {
-                    fullWidth: true,
-                    ...register('birthdate', {
-                      required: 'Este campo es requerido',
-                      valueAsDate: true,
-                    }),
-                    error: !!errors.lastName,
-                  }
-                }}
-              />
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={12} sm={6}>
             <TextField
               select
-              value={'Male'}
+              value={'M'}
               fullWidth
               label="Género"
               {...register('gender', {
@@ -84,8 +82,8 @@ export const SignUpForm = () => {
               })}
               error={!!errors.gender}
             >
-              <MenuItem value="Male">Masculino</MenuItem>
-              <MenuItem value="Female">Femenino</MenuItem>
+              <MenuItem value="M">Masculino</MenuItem>
+              <MenuItem value="F">Femenino</MenuItem>
             </TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -96,16 +94,6 @@ export const SignUpForm = () => {
                 required: 'Este campo es requerido',
               })}
               error={!!errors.identification}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Teléfono"
-              {...register('phone', {
-                required: 'Este campo es requerido',
-              })}
-              error={!!errors.phone}
             />
           </Grid>
           <Grid item xs={12}>

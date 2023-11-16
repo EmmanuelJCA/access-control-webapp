@@ -1,6 +1,7 @@
 import { IProfile } from "../user/user";
 
-export interface ISignUp extends IProfile {
+export interface ISignUp {
   email:    string;
   password: string;
+  profile : IProfile;
 }

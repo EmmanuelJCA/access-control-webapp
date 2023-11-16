@@ -11,8 +11,6 @@ export interface IProfile {
   firstName:      string;
   lastName:       string;
   gender:         EGender;
-  birthdate:      string;
-  phone:          string;
 }
 
 export enum EGender {
